@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django-website
+  namespace: argocd
+  labels:
+    app: django-website  #dep label
+spec:
+  selector:
+    matchLabels:
+      app: django-website #pod label
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: django-website #container label
+    spec:
+      containers:
+      - name: django
+        image: pinkeshceq/django-website:38
+        imagePullPolicy : Always
+        ports:
+        - containerPort: 8000
+
+# this is comment from Pinkesh 
